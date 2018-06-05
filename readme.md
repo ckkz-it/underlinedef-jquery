@@ -1,4 +1,6 @@
-#Underline Definitions 0.0.1 by Andrey Laguta
+#Underline Definitions
+
+Underline Definitions 1.0.0 by Andrey Laguta.
 
 Create underline definitions for your choosed words and definitions.
 
