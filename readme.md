@@ -1,4 +1,5 @@
-#Underline Definitions 0.1 by Andrey Laguta
+#Underline Definitions 0.0.1 by Andrey Laguta
+
 Create underline definitions for your choosed words and definitions.
 
 License: [MIT](https://mit-license.org)
