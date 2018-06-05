@@ -41,18 +41,18 @@ You just define two arrays in your `main.js` and then call the plugin to the sel
   ...
 </body>
 ````
-Choose one or multiple selectors. It could be, for example, `p` paragraphs, `div` wrappers or just `body` tag. Or some of them listed one after another. I recommend use any classes, id's, tags but `body` or whole page wrappers, because it would slow down page render.
+Choose one or multiple selectors. It could be, for example, `<p>` paragraphs, `<div>` wrappers or just `<body>` tag. Or some of them listed one after another. I recommend use any classes, id's, tags but `<body>` or whole page wrappers, because it would slow down page render.
 
 ````javascript
 $(".wrapper").underlineDef({
   words: wordsArray,                       // Your words array you want to describe.
-  definitions: definitionsArray            // Your definitions array for chosen words. Remember, they have to match each other.
+  definitions: definitionsArray,            // Your definitions array for chosen words. Remember, they have to match each other.
 
   // These are two required options, other are optional
 
   underlineClass: 'underline-definitions', // This class is defined in plugin and attached to head wrapped in style tag, if another class isn't defined. To use your own class, just set it in this option and edit in your stylesheet file as usual.
   tagName: 'span',                         // Default tag to wrap chosen words in.
-  attr: 'title,                            // Default attribute for definitions. If you want to use custom tooltips for definitions, change attr to 'data-title' or other which is used in your custom tooltips plugin.
+  attr: 'title',                            // Default attribute for definitions. If you want to use custom tooltips for definitions, change attr to 'data-title' or other which is used in your custom tooltips plugin.
   search: false,                           // You can add search onclick event for words. Availiable options: "google", "wikipedia", "yandex". Also, you can add your own search engines in javascript source file.
   preventDefault: false                   // Use when "search" option is set. Useful if tagName is "a" and you want to prevent default action.
 });
@@ -63,3 +63,4 @@ And that's it. Chosen words should be underlined on your pages.
 
 ## Other Resources
 - [UnderlineDefinitions.js: Pure JS version of plugin. No jQuery required](https://github.com/ckkz-it/underlinedef-purejs)
+- [Babel](http://babeljs.io/)
