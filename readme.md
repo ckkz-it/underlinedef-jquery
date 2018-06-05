@@ -4,7 +4,7 @@ Create underlined definitions for your choosed words and definitions.
 
 License: [MIT](https://mit-license.org)
 
-[![Underlined Definitions](https://ckkz-it.github.io/underlinedef-jquery/img/preview.png "Underlined Definitions")](https://ckkz-it.github.io/underlinedef-jquery/)
+[![Underlined Definitions](https://ckkz-it.github.io/underlinedef-jquery/img/jquery.png "Underlined Definitions")](https://ckkz-it.github.io/underlinedef-jquery/)
 
 ## Requirement
 
