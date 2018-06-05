@@ -1,3 +1,5 @@
+"use strict";
+
 (function($) {
 
 	$.fn.underlineDef = function (options) {
@@ -8,20 +10,22 @@
 					attr: 'title',
 					words: '.*',
 					definitions: "Words Array Isn't Defined",
-					search: false
+					search: false,
+					preventDefault: true
 				}, options);
 
 
 		return this.each(function() {
 
 			let el = this,
-					cl = settings.underlineClass,
-					tag = settings.tagName,
-					attr = settings.attr,
 					words = settings.words,
 					//Check if "words" aren defined
 					definitions = (words != '.*') ? settings.definitions : "Define Definitions and/or Words Array",
+					cl = settings.underlineClass,
+					tag = settings.tagName,
+					attr = settings.attr,
 					search = settings.search,
+					preventDefault = settings.preventDefault,
 					elHTML = el.innerHTML;
 
 		//Define style if underlineClass ins't set
@@ -31,10 +35,12 @@
 				let css = '.underline-definitions {'+
 										'border-bottom: 1px dashed #333; '+
 										'position: relative; '+
+										'color: #049ccf;'+
 										'cursor: help;'+
 									'} '+
 
 									'.underline-definitions:hover {'+
+										'color: inherit;'+
 										'border-bottom: 1px solid #333;'+
 									'}';
 
@@ -53,20 +59,30 @@
 								//Check if "words" are defined AND definitions aren't
 								if (typeof definitions != 'string') {
 
-									if (_compareStrings(words[j], elTextArr[i])) {
+									if (_compareStrings(words[j], elTextArr[i]) === 2) {
 										elTextArr[i] = `<${tag} class="${cl}" ${attr}="`+
 																	`${definitions[j]}">${elTextArr[i]}</${tag}>`;
 										continue;
-									}
+									} else if (_compareStrings(words[j], elTextArr[i]) === 1) {
+													elTextArr[i] = `<${tag} class="${cl}" ${attr}="`+
+																`${definitions[j]}">${elTextArr[i].replace(/[!?.,<>]*/g, '')}</${tag}>`+
+																`${elTextArr[i].replace(/\w/g, '')}`;
+													continue;
+													}
 
 								} else {
 
 									definitions = "Define Definitions Array";
-									if (_compareStrings(words[j], elTextArr[i])) {
+									if (_compareStrings(words[j], elTextArr[i]) === 2) {
 										elTextArr[i] = `<${tag} class="${cl}" ${attr}="`+
 																	`${definitions}">${elTextArr[i]}</${tag}>`;
 										continue;
-									}
+									} else if (_compareStrings(words[j], elTextArr[i]) === 1) {
+													elTextArr[i] = `<${tag} class="${cl}" ${attr}="`+
+																`${definitions}">${elTextArr[i].replace(/[!?.,<>]*/g, '')}</${tag}>`+
+																`${elTextArr[i].replace(/\w/g, '')}`;
+													continue;
+													}
 
 								}
 
@@ -74,10 +90,15 @@
 
 						} else {
 							//Case for only one word and one definition
-							if (_compareStrings(words, elTextArr[i])) {
+							if (_compareStrings(words, elTextArr[i]) === 2) {
 								elTextArr[i] = `<${tag} class="${cl}" ${attr}="`+
 															`${definitions}">${elTextArr[i]}</${tag}>`;
-							}
+							} else if (_compareStrings(words, elTextArr[i]) === 1) {
+											elTextArr[i] = `<${tag} class="${cl}" ${attr}="`+
+														`${definitions}">${elTextArr[i].replace(/[!?.,<>]*/g, '')}</${tag}>`+
+														`${elTextArr[i].replace(/\w/g, '')}`;
+										}
+
 
 						}
 
@@ -90,7 +111,7 @@
 			//Attach search onclick event if defined
 			if (search) {
 
-				elementsJoined = $('.'+cl);
+				let elementsJoined = $('.'+cl);
 				elementsJoined.on('click', _search);
 
 			}
@@ -99,12 +120,15 @@
 			Private functions
 			------------------*/
 			function _compareStrings(string1, string2) {
-				let expr = new RegExp('^>*'+string1+'[!?.,<(\'s)]*$', 'i');
-				return expr.test(string2);
+				let a = new RegExp('^>*'+string1+'[!?.,<(\'s)s]*$', 'i'),
+						b = string1===string2;
+
+				a = a.test(string2);
+				return a+b;
 			}
 
 			function _search(e) {
-				e.preventDefault();
+				if (preventDefault) e.preventDefault();
 				//Search clicked word w/o symbols (e.g. !?.,<>)
 				let queryText = this.innerText.replace(/[!?.,<>]*/g, '').toLowerCase(),
 						href;
