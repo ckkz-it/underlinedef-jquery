@@ -65,7 +65,7 @@
 										continue;
 									} else if (_compareStrings(words[j], elTextArr[i]) === 1) {
 													elTextArr[i] = `<${tag} class="${cl}" ${attr}="`+
-																`${definitions[j]}">${elTextArr[i].replace(/[!?.,<>]*/g, '')}</${tag}>`+
+																`${definitions[j]}">${elTextArr[i].replace(/[!?\.,<>\(\)]/g, '')}</${tag}>`+
 																`${elTextArr[i].replace(/\w/g, '')}`;
 													continue;
 													}
@@ -79,7 +79,7 @@
 										continue;
 									} else if (_compareStrings(words[j], elTextArr[i]) === 1) {
 													elTextArr[i] = `<${tag} class="${cl}" ${attr}="`+
-																`${definitions}">${elTextArr[i].replace(/[!?.,<>]*/g, '')}</${tag}>`+
+																`${definitions}">${elTextArr[i].replace(/[!?\.,<>\(\)]/g, '')}</${tag}>`+
 																`${elTextArr[i].replace(/\w/g, '')}`;
 													continue;
 													}
@@ -95,7 +95,7 @@
 															`${definitions}">${elTextArr[i]}</${tag}>`;
 							} else if (_compareStrings(words, elTextArr[i]) === 1) {
 											elTextArr[i] = `<${tag} class="${cl}" ${attr}="`+
-														`${definitions}">${elTextArr[i].replace(/[!?.,<>]*/g, '')}</${tag}>`+
+														`${definitions}">${elTextArr[i].replace(/[!?\.,<>\(\)]/g, '')}</${tag}>`+
 														`${elTextArr[i].replace(/\w/g, '')}`;
 										}
 
@@ -120,7 +120,7 @@
 			Private functions
 			------------------*/
 			function _compareStrings(string1, string2) {
-				let a = new RegExp('^>*'+string1+'[!?.,<(\'s)s]*$', 'i'),
+				let a = new RegExp('^>*'+string1+'[!?.,<>\(\)(\'s)s]*$', 'i'),
 						b = string1===string2;
 
 				a = a.test(string2);
@@ -130,7 +130,7 @@
 			function _search(e) {
 				if (preventDefault) e.preventDefault();
 				//Search clicked word w/o symbols (e.g. !?.,<>)
-				let queryText = this.innerText.replace(/[!?.,<>]*/g, '').toLowerCase(),
+				let queryText = this.innerText.replace(/[!?.,<>\(\)]*/, '').toLowerCase(),
 						href;
 
 				//Add here your search engines
