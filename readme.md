@@ -1,4 +1,4 @@
-# Underlined Definitions 1.0.0 by Andrey Laguta
+# Underlined Definitions 1.0.1 by Andrey Laguta
 
 Create underlined definitions for your choosed words and definitions.
 
